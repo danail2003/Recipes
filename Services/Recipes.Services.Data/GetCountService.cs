@@ -2,9 +2,9 @@
 {
     using System.Linq;
 
-    using Recipes.Data.Common.Repositories;
-    using Recipes.Data.Models;
-    using Recipes.Services.Data.Models;
+    using global::Recipes.Data.Common.Repositories;
+    using global::Recipes.Data.Models;
+    using global::Recipes.Services.Data.Models;
 
     public class GetCountService : IGetCountService
     {

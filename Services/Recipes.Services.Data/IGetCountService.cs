@@ -1,6 +1,6 @@
 ﻿namespace Recipes.Services.Data
 {
-    using Recipes.Services.Data.Models;
+    using global::Recipes.Services.Data.Models;
 
     public interface IGetCountService
     {

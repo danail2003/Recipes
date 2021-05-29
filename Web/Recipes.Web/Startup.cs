@@ -17,6 +17,8 @@
     using Recipes.Data.Repositories;
     using Recipes.Data.Seeding;
     using Recipes.Services.Data;
+    using Recipes.Services.Data.Categories;
+    using Recipes.Services.Data.Recipes;
     using Recipes.Services.Mapping;
     using Recipes.Services.Messaging;
     using Recipes.Web.ViewModels;
@@ -64,6 +66,8 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IGetCountService, GetCountService>();
+            services.AddTransient<IGetCategoriesService, GetCategoriesService>();
+            services.AddTransient<IRecipesService, RecipesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

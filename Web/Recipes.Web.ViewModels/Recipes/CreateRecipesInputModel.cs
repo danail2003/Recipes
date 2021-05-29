@@ -14,15 +14,19 @@
         [MinLength(100)]
         public string Instructions { get; set; }
 
-        public TimeSpan PreparationTime { get; set; }
+        [Range(1, 3 * 60 * 60)]
+        public int PreparationTime { get; set; }
 
-        public TimeSpan CookingTime { get; set; }
+        [Range(1, 5 * 60 * 60)]
+        public int CookingTime { get; set; }
 
         [Range(1, 50)]
         public int PortionsCount { get; set; }
 
         public int CategoryId { get; set; }
 
-        public IEnumerable<RecipeIngredientsInputModel> RecipeIngredientsInputModel { get; set; }
+        public IEnumerable<RecipeIngredientsInputModel> Ingredients { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> Categories { get; set; }
     }
 }
