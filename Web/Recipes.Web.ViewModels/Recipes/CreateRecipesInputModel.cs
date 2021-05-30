@@ -25,6 +25,9 @@
 
         public int CategoryId { get; set; }
 
+        [Required]
+        public string ImageUrl { get; set; }
+
         public IEnumerable<RecipeIngredientsInputModel> Ingredients { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Categories { get; set; }

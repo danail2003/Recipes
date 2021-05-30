@@ -10,12 +10,14 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using MoiteRecepti.Services;
     using Recipes.Data;
     using Recipes.Data.Common;
     using Recipes.Data.Common.Repositories;
     using Recipes.Data.Models;
     using Recipes.Data.Repositories;
     using Recipes.Data.Seeding;
+    using Recipes.Services;
     using Recipes.Services.Data;
     using Recipes.Services.Data.Categories;
     using Recipes.Services.Data.Recipes;
@@ -68,6 +70,7 @@
             services.AddTransient<IGetCountService, GetCountService>();
             services.AddTransient<IGetCategoriesService, GetCategoriesService>();
             services.AddTransient<IRecipesService, RecipesService>();
+            services.AddTransient<IGotvachBgScraperService, GotvachBgScraperService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

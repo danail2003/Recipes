@@ -23,6 +23,8 @@
 
         public int PortionsCount { get; set; }
 
+        public string OriginalUrl { get; set; }
+
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }

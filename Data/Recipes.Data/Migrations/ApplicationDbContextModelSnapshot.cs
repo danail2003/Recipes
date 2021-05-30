@@ -292,6 +292,9 @@ namespace Recipes.Data.Migrations
                     b.Property<int>("RecipeId")
                         .HasColumnType("int");
 
+                    b.Property<string>("RemoteImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedByUserId");
@@ -362,6 +365,9 @@ namespace Recipes.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OriginalUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PortionsCount")

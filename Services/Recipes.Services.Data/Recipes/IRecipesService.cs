@@ -6,6 +6,6 @@
 
     public interface IRecipesService
     {
-        Task CreateAsync(CreateRecipesInputModel inputModel);
+        Task CreateAsync(CreateRecipesInputModel inputModel, string userId);
     }
 }

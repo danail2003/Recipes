@@ -21,7 +21,7 @@
             this.ingredientsRepository = ingredientsRepository;
         }
 
-        public async Task CreateAsync(CreateRecipesInputModel inputModel)
+        public async Task CreateAsync(CreateRecipesInputModel inputModel, string userId)
         {
             var recipe = new Recipe
             {
@@ -31,6 +31,7 @@
                 CookingTime = TimeSpan.FromMinutes(inputModel.CookingTime),
                 CategoryId = inputModel.CategoryId,
                 Instructions = inputModel.Instructions,
+                CreatedByUserId = userId,
             };
 
             foreach (var ingredient in inputModel.Ingredients)
