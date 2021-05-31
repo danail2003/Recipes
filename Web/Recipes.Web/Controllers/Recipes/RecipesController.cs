@@ -54,11 +54,12 @@
             return this.Redirect("/");
         }
 
-        public IActionResult All(int id)
+        public IActionResult All(int id = 1)
         {
             var viewModel = new RecipesListViewModel
             {
                 PageNumber = id,
+                Recipes = this.recipesService.GetAll<RecipesViewModel>(12, id),
             };
 
             return this.View(viewModel);

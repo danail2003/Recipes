@@ -1,11 +1,13 @@
 ﻿namespace Recipes.Services.Data.Recipes
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using global::Recipes.Data.Common.Repositories;
     using global::Recipes.Data.Models;
+    using global::Recipes.Services.Mapping;
     using global::Recipes.Web.ViewModels.Recipes;
 
     public class RecipesService : IRecipesService
@@ -55,6 +57,15 @@
 
             await this.recipesRepository.AddAsync(recipe);
             await this.recipesRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetAll<T>(int itemsPerPage, int page)
+        {
+            return this.recipesRepository.AllAsNoTracking()
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+                .To<T>()
+                .ToList();
         }
     }
 }
