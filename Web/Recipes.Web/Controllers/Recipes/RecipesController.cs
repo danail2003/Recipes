@@ -56,10 +56,14 @@
 
         public IActionResult All(int id = 1)
         {
+            const int ItemsPerPage = 12;
+
             var viewModel = new RecipesListViewModel
             {
+                ItemsPerPage = ItemsPerPage,
+                RecipesCount = this.recipesService.GetCount(),
                 PageNumber = id,
-                Recipes = this.recipesService.GetAll<RecipesViewModel>(12, id),
+                Recipes = this.recipesService.GetAll<RecipesViewModel>(ItemsPerPage, id),
             };
 
             return this.View(viewModel);
