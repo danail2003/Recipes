@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@
 
     public class RecipesService : IRecipesService
     {
+        private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif", "jpeg" };
         private readonly IDeletableEntityRepository<Recipe> recipesRepository;
         private readonly IDeletableEntityRepository<Ingredient> ingredientsRepository;
 
@@ -23,7 +25,7 @@
             this.ingredientsRepository = ingredientsRepository;
         }
 
-        public async Task CreateAsync(CreateRecipesInputModel inputModel, string userId)
+        public async Task CreateAsync(CreateRecipesInputModel inputModel, string userId, string path)
         {
             var recipe = new Recipe
             {
@@ -53,6 +55,29 @@
                     Ingredient = newIngredient,
                     Quantity = ingredient.Quantity,
                 });
+            }
+
+            Directory.CreateDirectory($"{path}/recipes/");
+
+            foreach (var image in inputModel.Images)
+            {
+                var extension = Path.GetExtension(image.FileName).TrimStart('.');
+                if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
+                {
+                    throw new InvalidOperationException($"This extension '{extension}' is not valid!");
+                }
+
+                Image dbImage = new()
+                {
+                    CreatedByUserId = userId,
+                    Extension = extension,
+                };
+
+                recipe.Images.Add(dbImage);
+
+                var physicalPath = $"{path}/recipes/{dbImage.Id}.{extension}";
+                using Stream stream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
+                await image.CopyToAsync(stream);
             }
 
             await this.recipesRepository.AddAsync(recipe);
