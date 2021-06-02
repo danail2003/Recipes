@@ -35,7 +35,7 @@
                 CookingTime = TimeSpan.FromMinutes(inputModel.CookingTime),
                 CategoryId = inputModel.CategoryId,
                 Instructions = inputModel.Instructions,
-                CreatedByUserId = userId,
+                AddedByUserId = userId,
             };
 
             foreach (var ingredient in inputModel.Ingredients)
@@ -69,14 +69,14 @@
 
                 Image dbImage = new()
                 {
-                    CreatedByUserId = userId,
+                    AddedByUserId = userId,
                     Extension = extension,
                 };
 
                 recipe.Images.Add(dbImage);
 
                 var physicalPath = $"{path}/recipes/{dbImage.Id}.{extension}";
-                using Stream stream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
+                using Stream stream = new FileStream(physicalPath, FileMode.Create);
                 await image.CopyToAsync(stream);
             }
 

@@ -277,7 +277,7 @@ namespace Recipes.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CreatedByUserId")
+                    b.Property<string>("AddedByUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -297,7 +297,7 @@ namespace Recipes.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedByUserId");
+                    b.HasIndex("AddedByUserId");
 
                     b.HasIndex("RecipeId");
 
@@ -340,14 +340,14 @@ namespace Recipes.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AddedByUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<TimeSpan>("CookingTime")
                         .HasColumnType("time");
-
-                    b.Property<string>("CreatedByUserId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -378,9 +378,9 @@ namespace Recipes.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("AddedByUserId");
 
-                    b.HasIndex("CreatedByUserId");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("IsDeleted");
 
@@ -465,9 +465,9 @@ namespace Recipes.Data.Migrations
 
             modelBuilder.Entity("Recipes.Data.Models.Image", b =>
                 {
-                    b.HasOne("Recipes.Data.Models.ApplicationUser", "CreatedByUser")
+                    b.HasOne("Recipes.Data.Models.ApplicationUser", "AddedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedByUserId");
+                        .HasForeignKey("AddedByUserId");
 
                     b.HasOne("Recipes.Data.Models.Recipe", "Recipe")
                         .WithMany("Images")
@@ -475,26 +475,26 @@ namespace Recipes.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("CreatedByUser");
+                    b.Navigation("AddedByUser");
 
                     b.Navigation("Recipe");
                 });
 
             modelBuilder.Entity("Recipes.Data.Models.Recipe", b =>
                 {
+                    b.HasOne("Recipes.Data.Models.ApplicationUser", "AddedByUser")
+                        .WithMany()
+                        .HasForeignKey("AddedByUserId");
+
                     b.HasOne("Recipes.Data.Models.Category", "Category")
                         .WithMany("Recipes")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Recipes.Data.Models.ApplicationUser", "CreatedByUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedByUserId");
+                    b.Navigation("AddedByUser");
 
                     b.Navigation("Category");
-
-                    b.Navigation("CreatedByUser");
                 });
 
             modelBuilder.Entity("Recipes.Data.Models.RecipeIngredient", b =>

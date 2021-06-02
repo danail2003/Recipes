@@ -54,16 +54,16 @@
 
             var user = await this.userManager.GetUserAsync(this.User);
 
-            try
-            {
                 await this.recipesService.CreateAsync(inputModel, user.Id, $"{this.environment.WebRootPath}/images");
+           /* try
+            {
             }
             catch (Exception ex)
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
                 inputModel.Categories = this.categoriesService.GetCategories();
                 return this.View(inputModel);
-            }
+            }*/
 
             return this.Redirect("/");
         }

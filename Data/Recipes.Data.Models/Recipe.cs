@@ -29,9 +29,9 @@
 
         public virtual Category Category { get; set; }
 
-        public string CreatedByUserId { get; set; }
+        public string AddedByUserId { get; set; }
 
-        public ApplicationUser CreatedByUser { get; set; }
+        public ApplicationUser AddedByUser { get; set; }
 
         public virtual ICollection<RecipeIngredient> RecipeIngredient { get; set; }
 

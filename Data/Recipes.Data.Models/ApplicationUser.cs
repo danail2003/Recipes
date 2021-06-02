@@ -4,9 +4,9 @@ namespace Recipes.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using Recipes.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+
+    using Recipes.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
