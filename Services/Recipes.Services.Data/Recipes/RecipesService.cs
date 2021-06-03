@@ -97,5 +97,10 @@
         {
             return this.recipesRepository.AllAsNoTracking().Count();
         }
+
+        public T GetRecipeById<T>(int id)
+        {
+            return this.recipesRepository.AllAsNoTracking().Where(x => x.Id == id).To<T>().FirstOrDefault();
+        }
     }
 }

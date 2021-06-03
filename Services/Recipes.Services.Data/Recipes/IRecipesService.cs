@@ -12,5 +12,7 @@
         IEnumerable<T> GetAll<T>(int itemsPerPage, int page);
 
         int GetCount();
+
+        T GetRecipeById<T>(int id);
     }
 }

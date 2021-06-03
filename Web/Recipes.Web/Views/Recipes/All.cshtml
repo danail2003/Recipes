@@ -13,7 +13,7 @@
             <div class="card-body">
                 <h5 class="card-title">@recipe.Name</h5>
                 <p class="card-text">@recipe.CategoryName</p>
-                <a href="#" class="btn btn-primary">Go To Recipe</a>
+                <a asp-action="ById" asp-route-id="@recipe.Id" class="btn btn-primary">Go To Recipe</a>
             </div>
         </div>
     }

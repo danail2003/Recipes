@@ -54,16 +54,16 @@
 
             var user = await this.userManager.GetUserAsync(this.User);
 
-                await this.recipesService.CreateAsync(inputModel, user.Id, $"{this.environment.WebRootPath}/images");
-           /* try
+            try
             {
+                await this.recipesService.CreateAsync(inputModel, user.Id, $"{this.environment.WebRootPath}/images");
             }
             catch (Exception ex)
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
                 inputModel.Categories = this.categoriesService.GetCategories();
                 return this.View(inputModel);
-            }*/
+            }
 
             return this.Redirect("/");
         }
@@ -86,6 +86,13 @@
             };
 
             return this.View(viewModel);
+        }
+
+        public IActionResult ById(int id)
+        {
+            var recipe = this.recipesService.GetRecipeById<SingleRecipeViewModel>(id);
+
+            return this.View(recipe);
         }
     }
 }
