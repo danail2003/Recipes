@@ -412,6 +412,37 @@ namespace Recipes.Data.Migrations
                     b.ToTable("RecipeIngredients");
                 });
 
+            modelBuilder.Entity("Recipes.Data.Models.Vote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<byte>("Value")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Votes");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Recipes.Data.Models.ApplicationRole", null)
@@ -516,6 +547,23 @@ namespace Recipes.Data.Migrations
                     b.Navigation("Recipe");
                 });
 
+            modelBuilder.Entity("Recipes.Data.Models.Vote", b =>
+                {
+                    b.HasOne("Recipes.Data.Models.Recipe", "Recipe")
+                        .WithMany("Votes")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Recipes.Data.Models.ApplicationUser", "User")
+                        .WithMany("Votes")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Recipe");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Recipes.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Claims");
@@ -523,6 +571,8 @@ namespace Recipes.Data.Migrations
                     b.Navigation("Logins");
 
                     b.Navigation("Roles");
+
+                    b.Navigation("Votes");
                 });
 
             modelBuilder.Entity("Recipes.Data.Models.Category", b =>
@@ -540,6 +590,8 @@ namespace Recipes.Data.Migrations
                     b.Navigation("Images");
 
                     b.Navigation("RecipeIngredient");
+
+                    b.Navigation("Votes");
                 });
 #pragma warning restore 612, 618
         }

@@ -22,6 +22,8 @@
 
         public string ImageUrl { get; set; }
 
+        public string OriginalUrl { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public int CategoryRecipesCount { get; set; }
