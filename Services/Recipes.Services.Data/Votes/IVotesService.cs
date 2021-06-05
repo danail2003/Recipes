@@ -5,5 +5,7 @@
     public interface IVotesService
     {
         Task SetVote(int recipeId, string userId, byte value);
+
+        double GetAverageVotes(int recipeId);
     }
 }

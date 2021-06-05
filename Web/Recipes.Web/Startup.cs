@@ -21,6 +21,7 @@
     using Recipes.Services.Data;
     using Recipes.Services.Data.Categories;
     using Recipes.Services.Data.Recipes;
+    using Recipes.Services.Data.Votes;
     using Recipes.Services.Mapping;
     using Recipes.Services.Messaging;
     using Recipes.Web.ViewModels;
@@ -57,6 +58,10 @@
                     }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
 
             services.AddSingleton(this.configuration);
 
@@ -71,6 +76,7 @@
             services.AddTransient<IGetCategoriesService, GetCategoriesService>();
             services.AddTransient<IRecipesService, RecipesService>();
             services.AddTransient<IGotvachBgScraperService, GotvachBgScraperService>();
+            services.AddTransient<IVotesService, VotesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
