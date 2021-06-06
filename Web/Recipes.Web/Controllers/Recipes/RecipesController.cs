@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
 
+    using global::Recipes.Common;
     using global::Recipes.Data.Models;
     using global::Recipes.Services.Data.Categories;
     using global::Recipes.Services.Data.Recipes;
@@ -66,6 +67,32 @@
             }
 
             return this.Redirect("/");
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public IActionResult Edit(int id)
+        {
+            var viewModel = this.recipesService.GetRecipeById<EditRecipeViewModel>(id);
+            viewModel.Categories = this.categoriesService.GetCategories();
+
+            return this.View(viewModel);
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditRecipeViewModel viewModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                var model = this.recipesService.GetRecipeById<EditRecipeViewModel>(id);
+                model.Categories = this.categoriesService.GetCategories();
+
+                return this.View(model);
+            }
+
+            await this.recipesService.UpdateAsync(id, viewModel);
+
+            return this.RedirectToAction(nameof(this.ById), new { id });
         }
 
         public IActionResult All(int id = 1)

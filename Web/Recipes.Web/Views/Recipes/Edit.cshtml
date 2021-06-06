@@ -1,0 +1,42 @@
+﻿@model Recipes.Web.ViewModels.Recipes.EditRecipeViewModel
+@{ 
+    this.ViewData["Title"] = "Edit recipe";
+    var items = Model.Categories.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+<h1>@this.ViewData["Title"]</h1>
+<hr />
+<form method="post">
+    <div class="form-group">
+        <label asp-for="@Model.Name"></label>
+        <input asp-for="@Model.Name" class="form-control" />
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Instructions"></label>
+        <textarea asp-for="@Model.Instructions" class="form-control"></textarea>
+        <span asp-validation-for="@Model.Instructions" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.PreparationTime"></label>
+        <input asp-for="@Model.PreparationTime" class="form-control" />
+        <span asp-validation-for="@Model.PreparationTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.CookingTime"></label>
+        <input asp-for="@Model.CookingTime" class="form-control" />
+        <span asp-validation-for="@Model.CookingTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.PortionsCount"></label>
+        <input asp-for="@Model.PortionsCount" class="form-control" />
+        <span asp-validation-for="@Model.PortionsCount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.CategoryId"></label>
+        <select asp-for="@Model.CategoryId" asp-items="items" class="form-control"></select>
+        <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
+    </div>
+    <input hidden asp-for="Id" />
+    <input type="submit" class="btn btn-success" value="Save" />
+</form>

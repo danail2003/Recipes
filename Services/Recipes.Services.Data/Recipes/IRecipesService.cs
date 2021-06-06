@@ -16,5 +16,7 @@
         IEnumerable<T> GetRandomRecipes<T>(int count);
 
         T GetRecipeById<T>(int id);
+
+        Task UpdateAsync(int id, EditRecipeViewModel viewModel);
     }
 }

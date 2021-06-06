@@ -107,5 +107,19 @@
         {
             return this.recipesRepository.AllAsNoTracking().Where(x => x.Id == id).To<T>().FirstOrDefault();
         }
+
+        public async Task UpdateAsync(int id, EditRecipeViewModel viewModel)
+        {
+            var recipe = this.recipesRepository.All().FirstOrDefault(x => x.Id == id);
+
+            recipe.Name = viewModel.Name;
+            recipe.Instructions = viewModel.Instructions;
+            recipe.PortionsCount = viewModel.PortionsCount;
+            recipe.CookingTime = TimeSpan.FromMinutes(viewModel.CookingTime);
+            recipe.PreparationTime = TimeSpan.FromMinutes(viewModel.PreparationTime);
+            recipe.CategoryId = viewModel.CategoryId;
+
+            await this.recipesRepository.SaveChangesAsync();
+        }
     }
 }
