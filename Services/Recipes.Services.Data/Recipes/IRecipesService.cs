@@ -13,6 +13,8 @@
 
         int GetCount();
 
+        IEnumerable<T> GetRandomRecipes<T>(int count);
+
         T GetRecipeById<T>(int id);
     }
 }

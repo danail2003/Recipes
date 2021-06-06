@@ -4,6 +4,7 @@
 
     using global::Recipes.Services.Data;
     using global::Recipes.Services.Data.Models;
+    using global::Recipes.Services.Data.Recipes;
     using global::Recipes.Web.ViewModels;
     using global::Recipes.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,14 @@
     public class HomeController : BaseController
     {
         private readonly IGetCountService countService;
+        private readonly IRecipesService recipesService;
 
-        public HomeController(IGetCountService countService)
+        public HomeController(
+            IGetCountService countService,
+            IRecipesService recipesService)
         {
             this.countService = countService;
+            this.recipesService = recipesService;
         }
 
         public IActionResult Index()
@@ -27,6 +32,7 @@
                 ImagesCount = countsDto.ImagesCount,
                 IngredientsCount = countsDto.IngredientsCount,
                 CategoriesCount = countsDto.CategoriesCount,
+                RandomRecipes = this.recipesService.GetRandomRecipes<HomeRecipesViewModel>(10),
             };
 
             return this.View(viewModel);

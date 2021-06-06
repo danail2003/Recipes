@@ -4,15 +4,30 @@
     this.ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<div class="text-center row">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
     <div class="col-md-4 offset-4">
-    <p>We have:</p>
-    <ul class="list-group">
-        <li class="list-group-item bg-info">Recipes Count: @Model.RecipesCount</li>
-        <li class="list-group-item">Categories Count: @Model.CategoriesCount</li>
-        <li class="list-group-item bg-info">Ingredients Count: @Model.IngredientsCount</li>
-        <li class="list-group-item">Images Count: @Model.ImagesCount</li>
-    </ul>
+        <p>We have:</p>
+        <ul class="list-group">
+            <li class="list-group-item bg-info">Recipes Count: @Model.RecipesCount</li>
+            <li class="list-group-item">Categories Count: @Model.CategoriesCount</li>
+            <li class="list-group-item bg-info">Ingredients Count: @Model.IngredientsCount</li>
+            <li class="list-group-item">Images Count: @Model.ImagesCount</li>
+        </ul>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            @foreach (var recipe in Model.RandomRecipes)
+            {
+                <div class="card col-md-6">
+                    <img src="@recipe.ImageUrl" class="card-img-top" alt="@recipe.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@recipe.Name</h5>
+                        <p class="card-text">@recipe.CategoryName</p>
+                        <a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id" class="btn btn-primary">Go To Recipe</a>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </div>

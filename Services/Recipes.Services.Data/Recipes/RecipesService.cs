@@ -98,6 +98,11 @@
             return this.recipesRepository.AllAsNoTracking().Count();
         }
 
+        public IEnumerable<T> GetRandomRecipes<T>(int count)
+        {
+            return this.recipesRepository.All().OrderBy(x => Guid.NewGuid()).Take(count).To<T>().ToList();
+        }
+
         public T GetRecipeById<T>(int id)
         {
             return this.recipesRepository.AllAsNoTracking().Where(x => x.Id == id).To<T>().FirstOrDefault();
