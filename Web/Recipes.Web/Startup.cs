@@ -21,6 +21,7 @@
     using Recipes.Services.Data;
     using Recipes.Services.Data.Categories;
     using Recipes.Services.Data.Recipes;
+    using Recipes.Services.Data.SearchRecipes;
     using Recipes.Services.Data.Votes;
     using Recipes.Services.Mapping;
     using Recipes.Services.Messaging;
@@ -75,8 +76,9 @@
             services.AddTransient<IGetCountService, GetCountService>();
             services.AddTransient<IGetCategoriesService, GetCategoriesService>();
             services.AddTransient<IRecipesService, RecipesService>();
-            services.AddTransient<IGotvachBgScraperService, GotvachBgScraperService>();
             services.AddTransient<IVotesService, VotesService>();
+            services.AddTransient<IIngredientsService, IngredientsService>();
+            services.AddTransient<IGotvachBgScraperService, GotvachBgScraperService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

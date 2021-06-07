@@ -1,0 +1,26 @@
+﻿@model Recipes.Web.ViewModels.Recipes.ListViewModel
+@{
+    this.ViewData["Title"] = "Search result";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+<div class="row">
+    @if (!Model.Recipes.Any())
+    {
+        <p>Not found!</p>
+    }
+    else
+    {
+        @foreach (var recipe in Model.Recipes)
+        {
+            <div class="card col-md-3 mb-3" style="width: 18rem;">
+                <img src="@recipe.ImageUrl" class="card-img-top pt-3" alt="@recipe.Name">
+                <div class="card-body">
+                    <h5 class="card-title">@recipe.Name</h5>
+                    <p class="card-text">@recipe.CategoryName</p>
+                    <a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id" class="btn btn-primary">Go To Recipe</a>
+                </div>
+            </div>
+        }
+    }
+</div>

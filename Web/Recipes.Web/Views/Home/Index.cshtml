@@ -6,7 +6,7 @@
 
 <div class="text-center row">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <div class="col-md-4 offset-4">
+    <div class="col-md-4 offset-4 mb-5">
         <p>We have:</p>
         <ul class="list-group">
             <li class="list-group-item bg-info">Recipes Count: @Model.RecipesCount</li>
@@ -19,8 +19,8 @@
         <div class="row">
             @foreach (var recipe in Model.RandomRecipes)
             {
-                <div class="card col-md-6">
-                    <img src="@recipe.ImageUrl" class="card-img-top" alt="@recipe.Name">
+                <div class="card col-md-6 mb-3">
+                    <img src="@recipe.ImageUrl" class="card-img-top pt-3" alt="@recipe.Name">
                     <div class="card-body">
                         <h5 class="card-title">@recipe.Name</h5>
                         <p class="card-text">@recipe.CategoryName</p>

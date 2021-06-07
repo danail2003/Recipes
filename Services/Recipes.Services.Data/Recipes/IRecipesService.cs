@@ -18,5 +18,7 @@
         T GetRecipeById<T>(int id);
 
         Task UpdateAsync(int id, EditRecipeViewModel viewModel);
+
+        IEnumerable<T> GetByIngredients<T>(IEnumerable<int> ingredients);
     }
 }
