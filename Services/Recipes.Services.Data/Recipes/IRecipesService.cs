@@ -20,5 +20,7 @@
         Task UpdateAsync(int id, EditRecipeViewModel viewModel);
 
         IEnumerable<T> GetByIngredients<T>(IEnumerable<int> ingredients);
+
+        Task DeleteAsync(int id);
     }
 }
